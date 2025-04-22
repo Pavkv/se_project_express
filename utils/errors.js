@@ -1,4 +1,5 @@
-module.exports = (err, req, res) => {
+/* eslint-disable no-unused-vars */
+module.exports = (err, req, res, next) => {
   console.log(err);
 
   if (err.name === 'DocumentNotFoundError') {

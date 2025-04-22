@@ -8,7 +8,7 @@ module.exports = (err, req, res) => {
     });
   }
 
-  if (err.name === 'ValidationError' || err.name === 'CastError') {
+  if (err.name === 'ValidationError' || err.name === 'CastError' || err.name === 'AssertionError') {
     return res.status(400).send({
       message:
         'Invalid data passed to the methods for creating an item/user or updating an item, or invalid ID passed to the params.',

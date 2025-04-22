@@ -1,4 +1,4 @@
-module.exports = (err, req, res, next) => {
+module.exports = (err, req, res) => {
   console.log(err);
 
   if (err.name === 'DocumentNotFoundError') {

@@ -21,6 +21,7 @@ app.use((req, res, next) => {
 
 app.use('/users', require('./routes/users'));
 app.use('/items', require('./routes/clothingItems'));
+
 app.use((req, res) => {
   res.status(NOT_FOUND).send({ message: 'Invalid data passed to the methods for creating an item/user or updating an item, or invalid ID passed to the params.' });
 });

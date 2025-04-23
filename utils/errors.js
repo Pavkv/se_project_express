@@ -1,26 +1,26 @@
-/* eslint-disable no-unused-vars */
+const {NOT_FOUND, BAD_REQUEST, DEFAULT} = require('./constants');
+
 module.exports = (err, req, res, next) => {
-  console.log(err);
+  console.log(err.stack);
 
   if (err.name === 'DocumentNotFoundError') {
-    return res.status(404).json({
+    res.status(NOT_FOUND).json({
       message:
         'There is no user or clothing item with the requested id, or the request was sent to a non-existent address.',
     });
-  }
-
-  if (
+  } else if (
     err.name === 'ValidationError' ||
-    err.name === 'CastError' ||
-    err.name === 'AssertionError'
+    err.name === 'CastError'
   ) {
-    return res.status(400).json({
+    res.status(BAD_REQUEST).json({
       message:
         'Invalid data passed to the methods for creating an item/user or updating an item, or invalid ID passed to the params.',
     });
+  } else {
+    res.status(DEFAULT).json({
+      message: 'An error occurred on the server.',
+    });
   }
 
-  return res.status(500).json({
-    message: 'An error occurred on the server.',
-  });
+  next();
 };

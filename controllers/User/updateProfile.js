@@ -1,5 +1,4 @@
 const User = require('../../models/user');
-const {NOT_FOUND} = require('../../utils/constants');
 
 module.exports = (req, res, next) => {
   const {name, avatar} = req.body;
@@ -9,9 +8,5 @@ module.exports = (req, res, next) => {
     {new: true, runValidators: true})
     .orFail()
     .then(user => res.send({data: user}))
-    .catch(err => {
-      err.status = NOT_FOUND;
-      err.message = 'User not found';
-      next(err);
-    });
+    .catch(err => next(err));
 };

@@ -1,8 +1,8 @@
 const express = require('express');
 const mongoose = require('mongoose');
+const cors = require("cors");
 const { NOT_FOUND } = require('./utils/constants');
 const errorHandler = require('./utils/errors');
-const cors = require("cors");
 
 const {PORT = 3001} = process.env;
 
@@ -19,7 +19,7 @@ app.use('/users', require('./routes/users'));
 app.use('/items', require('./routes/clothingItems'));
 
 app.use((req, res) => {
-  res.status(NOT_FOUND).send({ message: 'Invalid data passed to the methods for creating an item/user or updating an item, or invalid ID passed to the params.' });
+  res.status(NOT_FOUND).send({ message: 'Requested resource not found' });
 });
 app.use(errorHandler);
 

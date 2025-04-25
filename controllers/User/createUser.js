@@ -1,5 +1,5 @@
-const User = require('../../models/user');
 const bcrypt = require('bcryptjs');
+const User = require('../../models/user');
 
 module.exports = (req, res, next) => {
   const { name, avatar, email, password } = req.body;
@@ -9,8 +9,8 @@ module.exports = (req, res, next) => {
       name, avatar, email, password: hash
     }))
     .then(user => {
-      user = user.toObject();
-      delete user.password;
+      const userData = user.toObject();
+      delete userData.password;
       res.send({data: user});
     }).catch(err => next(err));
 };

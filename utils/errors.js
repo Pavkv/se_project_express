@@ -1,4 +1,4 @@
-const { UNAUTHORIZED, FORBIDDEN, NOT_FOUND, CONFLICT, BAD_REQUEST, DEFAULT } = require('../utils/constants');
+const { UNAUTHORIZED, FORBIDDEN, NOT_FOUND, CONFLICT, BAD_REQUEST, DEFAULT } = require('./constants');
 
 module.exports = (err, req, res, next) => {
   console.log(err.stack);

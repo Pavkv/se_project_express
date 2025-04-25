@@ -44,8 +44,7 @@ userSchema.statics.findUserByCredentials = function (email, password, next) {
 
   return this.findOne({ email }).select('+password')
     .then((user) => {
-      return bcrypt.compare(password, user.password)
-        .then(() => {return user});
+      bcrypt.compare(password, user.password).then(() => {return user});
     }).catch(err => next(err));
 };
 

@@ -5,7 +5,7 @@ module.exports = (err, req, res, next) => {
 
   if (err.name === 'UnauthorizedError') {
     res.status(UNAUTHORIZED).json({
-      message: 'Authorization required',
+      message: err.message,
     });
   } else if (err.name === 'ForbiddenError') {
     res.status(FORBIDDEN).json({

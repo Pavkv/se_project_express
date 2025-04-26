@@ -11,6 +11,6 @@ module.exports = (req, res, next) => {
     .then(user => {
       const userData = user.toObject();
       delete userData.password;
-      res.send({data: user});
+      res.send({data: userData});
     }).catch(err => next(err));
 };

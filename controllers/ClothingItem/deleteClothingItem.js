@@ -8,7 +8,7 @@ module.exports = (req, res, next) => {
       if (req.user._id !== clothingItem.owner._id) {
         const error = new Error('You do not have permission to delete this item');
         error.name = 'ForbiddenError';
-        return next(error);
+        next(error);
       }
       res.send({data: clothingItem});
     })

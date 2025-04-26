@@ -6,7 +6,9 @@ module.exports = (req, res, next) => {
     .populate('owner')
     .then(clothingItem => {
       if (req.user._id !== clothingItem.owner._id) {
-        throw new Error('You do not have permission to delete this item');
+        const error = new Error('You do not have permission to delete this item');
+        error.name = 'ForbiddenError';
+        return next(error);
       }
       res.send({data: clothingItem});
     })

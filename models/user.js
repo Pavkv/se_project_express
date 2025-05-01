@@ -13,11 +13,12 @@ const userSchema = new mongoose.Schema({
     type: String,
     validate: {
       validator(value) {
-        return validator.isURL(value)
+        if (value){
+          return validator.isURL(value)
+        }
       },
       message: 'You must enter a valid URL',
     },
-    required: true
   },
   email: {
     type: String,

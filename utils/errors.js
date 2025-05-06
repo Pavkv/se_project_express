@@ -1,40 +1,44 @@
-const { UNAUTHORIZED, FORBIDDEN, NOT_FOUND, CONFLICT, BAD_REQUEST, DEFAULT } = require('./constants');
+const { UNAUTHORIZED, FORBIDDEN, NOT_FOUND, CONFLICT, BAD_REQUEST } = require('./errorCodes');
 
-module.exports = (err, req, res, next) => {
-  console.log(err.stack);
+class BadRequestError extends Error {
+  constructor(message) {
+    super(message);
+    this.statusCode = BAD_REQUEST;
+  }
+}
 
-  if (err.name === 'UnauthorizedError') {
-    res.status(UNAUTHORIZED).json({
-      message: 'Authorization required',
-    });
-  } else if (err.name === 'ForbiddenError') {
-    res.status(FORBIDDEN).json({
-      message: 'You do not have permission to perform this action',
-    });
+class UnauthorizedError extends Error {
+  constructor(message) {
+    super(message);
+    this.statusCode = UNAUTHORIZED;
   }
-  else if (err.name === 'DocumentNotFoundError') {
-    res.status(NOT_FOUND).json({
-      message:
-        'The requested resource was not found. Please check the URL and try again.',
-    });
-  } else  if (err.code === 11000) {
-    res.status(CONFLICT).json({
-      message: 'This email is already registered. Please use a different email.',
-    });
-  }
-  else if (
-    err.name === 'ValidationError' ||
-    err.name === 'CastError'
-  ) {
-    res.status(BAD_REQUEST).json({
-      message:
-        'The request was malformed. Please check the data and try again.',
-    });
-  } else {
-    res.status(DEFAULT).json({
-      message: 'An error occurred on the server.',
-    });
-  }
+}
 
-  next();
-};
+class ForbiddenError extends Error {
+  constructor(message) {
+    super(message);
+    this.statusCode = FORBIDDEN;
+  }
+}
+
+class NotFoundError extends Error {
+  constructor(message) {
+    super(message);
+    this.statusCode = NOT_FOUND;
+  }
+}
+
+class ConflictError extends Error {
+  constructor(message) {
+    super(message);
+    this.statusCode = CONFLICT;
+  }
+}
+
+module.exports = {
+  BadRequestError,
+  UnauthorizedError,
+  ForbiddenError,
+  NotFoundError,
+  ConflictError
+}

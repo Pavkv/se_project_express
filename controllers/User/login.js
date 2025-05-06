@@ -1,6 +1,7 @@
 const jwt = require('jsonwebtoken');
 const User = require('../../models/user');
 const {JWT_SECRET} = require('../../utils/config');
+const {BadRequestError, UnauthorizedError} = require("../../utils/errors");
 
 module.exports = (req, res, next) => {
   const {email, password} = req.body;
@@ -11,5 +12,13 @@ module.exports = (req, res, next) => {
         token: jwt.sign({_id: user._id}, JWT_SECRET, {expiresIn: "7d",})
       });
     })
-    .catch(err => next(err));
+    .catch(err => {
+      if (err.name === 'ValidationError') {
+        next(new BadRequestError('Invalid data provided'));
+      }
+      if (err.name === 'UnauthorizedError') {
+        next(new UnauthorizedError('Invalid email or password'));
+      }
+      next(err);
+    });
 };

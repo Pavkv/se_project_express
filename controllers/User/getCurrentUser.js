@@ -4,5 +4,5 @@ module.exports = (req, res, next) => {
   User.findById(req.user._id)
     .orFail()
     .then(user => res.send({data: user}))
-    .catch(err => next(err));
+    .catch(next);
 };

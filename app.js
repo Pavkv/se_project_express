@@ -8,14 +8,22 @@ const { NOT_FOUND } = require('./utils/errorCodes');
 const errorHandler = require('./middlewares/errorHandler');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
 
-
 const {PORT = 3001} = process.env;
 
 const app = express();
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use(cors());
+app.use(cors(
+  {
+    origin: [
+      'http://localhost:3000',
+      'https://whatowearexpress.twilightparadox.com',
+      'https://www.whatowearexpress.twilightparadox.com',
+    ],
+    credentials: true,
+  },
+));
 
 app.use(express.static(path.join(__dirname, 'frontend')));
 

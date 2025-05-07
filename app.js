@@ -2,7 +2,6 @@ require('dotenv').config();
 const express = require('express');
 const mongoose = require('mongoose');
 const cors = require("cors");
-const path = require('path');
 const { errors } = require('celebrate');
 const { NOT_FOUND } = require('./utils/errorCodes');
 const errorHandler = require('./middlewares/errorHandler');
@@ -25,8 +24,6 @@ app.use(cors(
   },
 ));
 
-app.use(express.static(path.join(__dirname, 'frontend')));
-
 mongoose.connect('mongodb://127.0.0.1:27017/wtwr_db');
 
 app.use(requestLogger);
@@ -44,5 +41,5 @@ app.use((req, res) => {
 app.use(errorHandler);
 
 app.listen(PORT, () => {
-  console.log(`Link to the server: http://localhost:${PORT}`);
+  console.log(`Your server is running on port ${PORT}`);
 });

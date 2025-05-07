@@ -31,7 +31,7 @@ const validateClothingItemBody = () => {
         "string.empty": 'The "weather" field must be filled in',
         "any.only": 'The "weather" field must be one of the following values: cold, warm, hot',
       })
-    }).unknown(true)
+    })
   });
 };
 
@@ -54,7 +54,7 @@ const validateUserInfoBody = () => {
       password: Joi.string().required().messages({
         "string.empty": 'The "password" field must be filled in',
       })
-    }).unknown(true)
+    })
   });
 };
 

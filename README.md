@@ -15,8 +15,6 @@ https://github.com/Pavkv/se_project_react
 ## Web Link
 https://whatowearexpress.twilightparadox.com
 
-(Click on the link to get access to the website)
-
 ---
 
 ## 🌐 Project Features

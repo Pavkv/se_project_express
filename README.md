@@ -1,50 +1,71 @@
-# WTWR Server (What to Wear)
+# WTWR Back-End
 
-This project is the **backend server for the WTWR (What to Wear) web application**, which allows users to share clothing suggestions based on the current weather. The server handles user and clothing item management, provides a RESTful API, and connects to a MongoDB database to store all application data.
+This is the back-end component of the **WTWR (What To Wear)** web application. It provides a RESTful API with user authentication and CRUD operations for managing user profiles and clothing items based on weather conditions.
+
+<img width="1470" alt="image" src="https://github.com/user-attachments/assets/5c1c659e-d34e-4f75-bea5-f765c0c7b7c8" />
 
 ---
 
-## 🌐 Functionality
+## Link for the front-end of a project
 
-- **User Management**
-  - Create new users
-  - Retrieve all users
-  - Retrieve individual users by ID
+https://github.com/Pavkv/se_project_react
 
-- **Clothing Item Management**
-  - Add a clothing item
-  - Delete a clothing item
-  - Like or unlike clothing items
-  - Retrieve all clothing items
+---
 
-- **Weather-based Filtering**
-  - Filter clothing items by weather condition: hot, warm, or cold
-  - Integrate temperature data for tailored results
+## Web Link
+https://whatowearexpress.twilightparadox.com
 
-- **Error Handling**
-  - All unknown routes return a 404 JSON error
-  - Centralized global error handler returns standardized messages for validation, database, and server errors
+(Click on the link to get access to the website)
+
+---
+
+## 🌐 Project Features
+
+- User registration and login with hashed passwords (bcrypt)
+- JWT-based authentication and protected routes
+- Full CRUD for clothing items
+- Input validation using Celebrate and Joi
+- Centralized error handling with meaningful status codes
+- MongoDB with Mongoose ODM
+- Deployed on a remote server with HTTPS and domain routing via Nginx
 
 ---
 
 ## ⚙️ Technologies Used
 
-- **Node.js** — JavaScript runtime for building scalable backend services
-- **Express.js** — Web application framework for routing and middleware
-- **MongoDB** — NoSQL database to persist users and clothing items
-- **Mongoose** — ODM for MongoDB to define schemas and run validation
-- **ESLint** — Linter for clean, consistent code
-- **Nodemon** — Dev tool for automatically restarting the server on file changes
-- **Postman** — API testing tool used for manual request verification
-- **dotenv** *(optional)* — For loading environment variables securely
-- **Celebrate / Joi** *(optional)* — Middleware for request body validation (if implemented)
+- **Node.js**
+- **Express**
+- **MongoDB** with **Mongoose**
+- **JWT (JSON Web Tokens)**
+- **Celebrate** (Joi validation middleware)
+- **bcryptjs** (for password hashing)
+- **dotenv**
+- **ESLint** (Airbnb base)
+- **Prettier** (code formatting)
+- **Nginx** (reverse proxy + HTTPS)
+- **Certbot** (SSL via Let’s Encrypt)
 
 ---
 
-## ✍️ Author
+## 🛡️ Security & Validation
 
-**Pasha Zobov**
-
-[GitHub Repository](https://github.com/Pavkv/se_project_express)
+- All protected routes require a valid JWT token in the `Authorization` header.
+- Celebrate and Joi are used to validate all input data.
+- Custom error classes and middleware for error handling.
 
 ---
+
+## 📄 License
+
+This project is licensed under the [ISC License](LICENSE).
+
+---
+
+## 👨‍💻 Author
+
+[Pasha Zobov](https://github.com/Pavkv)
+2025 © WTWR
+
+---
+
+Feel free to add suggestions or submit issues via GitHub.

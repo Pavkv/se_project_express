@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const validator = require('validator');
 const bcrypt = require('bcryptjs');
-const {UnauthorizedError} = require("../utils/errors");
+const UnauthorizedError = require("../utils/Errors/UnauthorizedError");
 
 const userSchema = new mongoose.Schema({
   name: {
@@ -14,9 +14,7 @@ const userSchema = new mongoose.Schema({
     type: String,
     validate: {
       validator(value) {
-        if (value){
-          return validator.isURL(value)
-        }
+        return value ? validator.isURL(value) : false;
       },
       message: 'You must enter a valid URL',
     },
@@ -39,7 +37,7 @@ const userSchema = new mongoose.Schema({
   },
 });
 
-userSchema.statics.findUserByCredentials = function (email, password, next) {
+userSchema.statics.findUserByCredentials = (email, password, next) => {
   if (!email || !password) {
     return Promise.reject(new UnauthorizedError('Email and password are required'));
   }

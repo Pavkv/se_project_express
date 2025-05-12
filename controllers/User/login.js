@@ -1,7 +1,8 @@
 const jwt = require('jsonwebtoken');
 const User = require('../../models/user');
 const {JWT_SECRET} = require('../../utils/config');
-const {BadRequestError, UnauthorizedError} = require("../../utils/errors");
+const BadRequestError = require("../../utils/Errors/BadRequestError");
+const UnauthorizedError = require("../../utils/Errors/UnauthorizedError");
 
 module.exports = (req, res, next) => {
   const {email, password} = req.body;

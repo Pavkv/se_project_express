@@ -1,5 +1,6 @@
 const ClothingItem = require('../../models/clothingItem');
-const {BadRequestError, NotFoundError} = require("../../utils/errors");
+const BadRequestError = require("../../utils/Errors/BadRequestError");
+const NotFoundError = require("../../utils/Errors/NotFoundError");
 
 module.exports = (req, res, next) => {
   ClothingItem.findByIdAndUpdate(req.params.itemId, {$addToSet: {likes: req.user._id}}, {new: true},)
@@ -14,6 +15,5 @@ module.exports = (req, res, next) => {
       } else {
         next(err);
       }
-      next(err);
     });
 };

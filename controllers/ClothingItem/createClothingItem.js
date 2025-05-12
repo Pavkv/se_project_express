@@ -1,5 +1,5 @@
 const ClothingItem = require('../../models/clothingItem');
-const {BadRequestError} = require("../../utils/errors");
+const BadRequestError = require("../../utils/Errors/BadRequestError");
 
 module.exports = (req, res, next) => {
   const { name, weather, imageUrl} = req.body;

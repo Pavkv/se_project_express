@@ -1,13 +1,14 @@
 const ClothingItem = require('../../models/clothingItem');
-const {ForbiddenError} = require("../../utils/errors");
+const ForbiddenError = require("../../utils/Errors/ForbiddenError");
+const NotFoundError = require("../../utils/Errors/NotFoundError");
 
 module.exports = (req, res, next) => {
   ClothingItem.findById(req.params.itemId)
-    .orFail()
+    .orFail(() => new NotFoundError('Clothing item not found'))
     .populate('owner')
     .then(clothingItem => {
       if (req.user._id !== String(clothingItem.owner._id)) {
-        next(new ForbiddenError('You do not have permission to delete this item'));
+        return next(new ForbiddenError('You do not have permission to delete this item'));
       }
       return clothingItem.deleteOne().then(() => res.status(200).send({ message: 'Item deleted successfully' }));
     }).catch(next);

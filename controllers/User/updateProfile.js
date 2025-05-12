@@ -1,5 +1,6 @@
 const User = require('../../models/user');
-const {BadRequestError} = require("../../utils/errors");
+const BadRequestError = require("../../utils/Errors/BadRequestError");
+const NotFoundError = require("../../utils/Errors/NotFoundError");
 
 module.exports = (req, res, next) => {
   const {name, avatar} = req.body;
@@ -7,7 +8,7 @@ module.exports = (req, res, next) => {
   User.findByIdAndUpdate(req.user._id,
     {name, avatar},
     {new: true, runValidators: true})
-    .orFail()
+    .orFail(() => new NotFoundError('User not found'))
     .then(user => res.send({data: user}))
     .catch(err => {
       if (err.name === 'ValidationError') {

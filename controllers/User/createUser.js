@@ -1,6 +1,7 @@
 const bcrypt = require('bcryptjs');
 const User = require('../../models/user');
-const {BadRequestError, ConflictError} = require("../../utils/errors");
+const BadRequestError= require("../../utils/Errors/BadRequestError");
+const ConflictError = require("../../utils/Errors/ConflictError");
 
 module.exports = (req, res, next) => {
   const { name, avatar, email, password } = req.body;

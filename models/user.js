@@ -37,7 +37,7 @@ const userSchema = new mongoose.Schema({
   },
 });
 
-userSchema.statics.findUserByCredentials = (email, password, next) => {
+userSchema.statics.findUserByCredentials = function findUserByCredentials(email, password, next) {
   if (!email || !password) {
     return Promise.reject(new UnauthorizedError('Email and password are required'));
   }
@@ -56,6 +56,6 @@ userSchema.statics.findUserByCredentials = (email, password, next) => {
           return user;
         });
     }).catch(next);
-};
+}
 
 module.exports = mongoose.model('user', userSchema);
